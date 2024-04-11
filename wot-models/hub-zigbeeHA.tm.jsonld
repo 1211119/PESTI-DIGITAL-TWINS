@@ -1,0 +1,106 @@
+{
+  "@context": [
+    "https://www.w3.org/2022/wot/td/v1.1",
+    {
+      "om2": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+      "time": "http://www.w3.org/2006/time#"
+    }
+  ],
+  "@type": "tm:ThingModel",
+  "title": "Hub - Zigbee HA",
+  "description": "Hub for managing Zigbee HA devices.",
+  "version": {
+    "model": "1.0.0"
+  },
+  "links": [
+    {
+      "rel": "tm:submodel",
+      "href": "https://github.com/1211119/PESTI-DIGITAL-TWINS/blob/main/wot-models/clamp-zigbee.tm.jsonld",
+      "type": "application/tm+json",
+      "instanceName": "Clamp Sensor"
+    },
+    {
+      "rel": "tm:submodel",
+      "href": "https://github.com/1211119/PESTI-DIGITAL-TWINS/blob/main/wot-models/plug-zigbee.tm.jsonld",
+      "type": "application/tm+json",
+      "instanceName": "Plug Sensor"
+    }
+  ],
+  "tm:optional": [],
+  "properties": {
+    "dataTags": {
+      "title": "Data Tags",
+      "description": "Tags de dados do hub.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "tagId": {
+            "title": "Tag ID",
+            "type": "string"
+          },
+          "dataType": {
+            "title": "Data Type",
+            "type": "string"
+          },
+          "acquisitionMode": {
+            "title": "Acquisition Mode",
+            "type": "string",
+            "enum": ["network-powered", "battery-powered"]
+          },
+          "acquisitionPeriod": {
+            "title": "Acquisition Period",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "memoryCapacity": {
+      "title": "Memory Capacity",
+      "description": "Capacidade de memória para aquisições.",
+      "type": "string",
+      "enum": [
+        "17 days (50 tags, 15-minute intervals)",
+        "2 months (Cloogy kit with 1 plug and 1 clamp)"
+      ]
+    },
+    "actions": {
+      "title": "Actions",
+      "description": "Ações suportadas pelo hub.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 124
+    },
+    "firmwareIdentification": {
+      "title": "Firmware Identification",
+      "description": "Identificação de versões de firmware locais e de dispositivos remotos.",
+      "type": "boolean"
+    },
+    "firmwareUpdate": {
+      "title": "Firmware Update",
+      "description": "Update de firmware (local, remoto e terceiros).",
+      "type": "object",
+      "properties": {
+        "local": {
+          "title": "Local",
+          "type": "boolean"
+        },
+        "remote": {
+          "title": "Remote",
+          "type": "boolean"
+        },
+        "thirdParty": {
+          "title": "Third Party",
+          "type": "boolean"
+        }
+      }
+    },
+    "debugTunnel": {
+      "title": "Debug Tunnel",
+      "description": "Túnel para Zigbee HA, Radio SIM TI e Modbus RTU (debug).",
+      "type": "boolean"
+    }
+  }
+}
