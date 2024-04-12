@@ -19,6 +19,7 @@
       "type": "application/tm+json",
       "instanceName": "Clamp Sensor"
     },
+    
     {
       "rel": "tm:submodel",
       "href": "https://github.com/1211119/PESTI-DIGITAL-TWINS/blob/main/wot-models/plug-zigbee.tm.jsonld",
