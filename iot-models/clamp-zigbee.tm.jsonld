@@ -2,106 +2,111 @@
   "@context": [
     "https://www.w3.org/2022/wot/td/v1.1",
     {
-      "om2": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
-      "time": "http://www.w3.org/2006/time#"
+      "om2": "http://www.ontology-of-units-of-measure.org/resource/om-2/"
     }
   ],
   "@type": "tm:ThingModel",
-  "title": "Hub - Zigbee HA",
-  "description": "Hub for managing Zigbee HA devices.",
+  "title": "Clamp - Zigbee HA Sensor",
   "version": {
     "model": "1.0.0"
   },
-  "links": [
-    {
-      "rel": "tm:submodel",
-      "href": "https://github.com/1211119/PESTI-DIGITAL-TWINS/blob/main/wot-models/clamp-zigbee.tm.jsonld",
-      "type": "application/tm+json",
-      "instanceName": "Clamp Sensor"
-    },
-    
-    {
-      "rel": "tm:submodel",
-      "href": "https://github.com/1211119/PESTI-DIGITAL-TWINS/blob/main/wot-models/plug-zigbee.tm.jsonld",
-      "type": "application/tm+json",
-      "instanceName": "Plug Sensor"
-    }
-  ],
   "tm:optional": [],
   "properties": {
-    "dataTags": {
-      "title": "Data Tags",
-      "description": "Tags de dados do hub.",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "tagId": {
-            "title": "Tag ID",
-            "type": "string"
-          },
-          "dataType": {
-            "title": "Data Type",
-            "type": "string"
-          },
-          "acquisitionMode": {
-            "title": "Acquisition Mode",
-            "type": "string",
-            "enum": ["network-powered", "battery-powered"]
-          },
-          "acquisitionPeriod": {
-            "title": "Acquisition Period",
-            "type": "string"
-          }
-        }
-      }
-    },
-    "memoryCapacity": {
-      "title": "Memory Capacity",
-      "description": "Capacidade de memória para aquisições.",
-      "type": "string",
-      "enum": [
-        "17 days (50 tags, 15-minute intervals)",
-        "2 months (Cloogy kit with 1 plug and 1 clamp)"
-      ]
-    },
-    "actions": {
-      "title": "Actions",
-      "description": "Ações suportadas pelo hub.",
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "maxItems": 124
-    },
-    "firmwareIdentification": {
-      "title": "Firmware Identification",
-      "description": "Identificação de versões de firmware locais e de dispositivos remotos.",
-      "type": "boolean"
+    "peakMeasurement": {
+      "title": "Peak Measurement",
+      "description": "Peak measurement recorded by the sensor.",
+      "type": "number",
+      "unit": "om2:unit",
+      "readOnly": true
     },
     "firmwareUpdate": {
       "title": "Firmware Update",
-      "description": "Update de firmware (local, remoto e terceiros).",
+      "description": "Capability for remote firmware updates.",
+      "type": "boolean",
+      "readOnly": false
+    },
+    "identificationMode": {
+      "title": "Identification Mode",
+      "description": "Sensor identification mode using LED.",
+      "type": "boolean",
+      "readOnly": false
+    },
+    "initialNetworkConnection": {
+      "title": "Initial Network Connection",
+      "description": "Process of initial network connection using a button.",
+      "type": "boolean",
+      "readOnly": false
+    },
+    "messageIndicatorLED": {
+      "title": "Message Indicator LED",
+      "description": "LED indication for message sending and network search process.",
+      "type": "boolean",
+      "readOnly": true
+    },
+    "readings": {
+      "title": "Readings",
+      "description": "Various sensor readings.",
       "type": "object",
       "properties": {
-        "local": {
-          "title": "Local",
-          "type": "boolean"
+        "instantaneousCurrentTotal": {
+          "title": "Instantaneous Current (Total)",
+          "type": "number",
+          "unit": "om2:ampere",
+          "readOnly": true
         },
-        "remote": {
-          "title": "Remote",
-          "type": "boolean"
+        "instantaneousCurrentPerPhase": {
+          "title": "Instantaneous Current (Per Phase)",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "unit": "om2:ampere"
+          },
+          "readOnly": true
         },
-        "thirdParty": {
-          "title": "Third Party",
-          "type": "boolean"
+        "cumulativeCurrentTotal": {
+          "title": "Cumulative Current (Total)",
+          "type": "number",
+          "unit": "om2:ampere",
+          "readOnly": true
+        },
+        "cumulativeCurrentPerPhase": {
+          "title": "Cumulative Current (Per Phase)",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "unit": "om2:ampere"
+          },
+          "readOnly": true
+        },
+        "batteryLevel": {
+          "title": "Battery Level",
+          "description": "Battery level in percentage.",
+          "type": "number",
+          "unit": "om2:percent",
+          "readOnly": true
+        },
+        "batteryVoltage": {
+          "title": "Battery Voltage",
+          "description": "Battery voltage.",
+          "type": "number",
+          "unit": "om2:volt",
+          "readOnly": true
+        },
+        "maximumMeasuredCurrent": {
+          "title": "Maximum Measured Current",
+          "description": "Maximum measured current.",
+          "type": "number",
+          "unit": "om2:ampere",
+          "readOnly": true
+        },
+        "measurementError": {
+          "title": "Measurement Error",
+          "description": "Measurement error under specified conditions.",
+          "type": "string",
+          "readOnly": true
         }
-      }
-    },
-    "debugTunnel": {
-      "title": "Debug Tunnel",
-      "description": "Túnel para Zigbee HA, Radio SIM TI e Modbus RTU (debug).",
-      "type": "boolean"
+      },
+      "readOnly": true
     }
   }
 }
