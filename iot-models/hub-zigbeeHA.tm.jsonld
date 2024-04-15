@@ -10,19 +10,19 @@
   "title": "Hub - Zigbee HA",
   "description": "Hub for managing Zigbee HA devices.",
   "version": {
-    "model": "1.0.0"
+    "model": "1.0.1"
   },
   "links": [
     {
       "rel": "tm:submodel",
-      "href": "https://github.com/1211119/PESTI-DIGITAL-TWINS/blob/main/wot-models/clamp-zigbee.tm.jsonld",
+      "href": "https://github.com/1211119/PESTI-DIGITAL-TWINS/blob/main/iot-models/clamp-zigbee.tm.jsonld",
       "type": "application/tm+json",
       "instanceName": "Clamp Sensor"
     },
-    
+
     {
       "rel": "tm:submodel",
-      "href": "https://github.com/1211119/PESTI-DIGITAL-TWINS/blob/main/wot-models/plug-zigbee.tm.jsonld",
+      "href": "https://github.com/1211119/PESTI-DIGITAL-TWINS/blob/main/iot-models/plug-zigbee.tm.jsonld",
       "type": "application/tm+json",
       "instanceName": "Plug Sensor"
     }
@@ -33,6 +33,7 @@
       "title": "Data Tags",
       "description": "Tags de dados do hub.",
       "type": "array",
+      "readOnly": true,
       "items": {
         "type": "object",
         "properties": {
@@ -47,23 +48,45 @@
           "acquisitionMode": {
             "title": "Acquisition Mode",
             "type": "string",
-            "enum": ["network-powered", "battery-powered"]
+            "enum": [ "network-powered", "battery-powered" ]
           },
           "acquisitionPeriod": {
             "title": "Acquisition Period",
-            "type": "string"
+            "type": "object",
+            "properties": {
+              "samplePeriod": {
+                "title": "Sample Period",
+                "description": "Duration of sample acquisition.",
+                "type": "number"
+              },
+              "sampleCount": {
+                "title": "Sample Count",
+                "description": "Number of measurements per acquisition.",
+                "type": "number"
+              }
+            }
+
           }
         }
       }
     },
-    "memoryCapacity": {
-      "title": "Memory Capacity",
+    "memory": {
+      "title": "Memory ",
       "description": "Capacidade de memória para aquisições.",
-      "type": "string",
-      "enum": [
-        "17 days (50 tags, 15-minute intervals)",
-        "2 months (Cloogy kit with 1 plug and 1 clamp)"
-      ]
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "maxMemoryCapacity": {
+          "title": "Max Memory Capacity",
+          "description": "Max capacity of the Hub",
+          "type": "number"
+        },
+        "maxMemoryPerPage": {
+          "title": "Max Memory Per Page",
+          "description": "Max capacity Per Page",
+          "type": "number"
+        }
+      }
     },
     "actions": {
       "title": "Actions",

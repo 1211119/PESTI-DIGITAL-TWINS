@@ -8,7 +8,7 @@
   "@type": "tm:ThingModel",
   "title": "Clamp - Zigbee HA Sensor",
   "version": {
-    "model": "1.0.0"
+    "model": "1.0.1"
   },
   "tm:optional": [],
   "properties": {
@@ -43,6 +43,7 @@
       "type": "boolean",
       "readOnly": true
     },
+
     "readings": {
       "title": "Readings",
       "description": "Various sensor readings.",
@@ -97,12 +98,6 @@
           "description": "Maximum measured current.",
           "type": "number",
           "unit": "om2:ampere",
-          "readOnly": true
-        },
-        "measurementError": {
-          "title": "Measurement Error",
-          "description": "Measurement error under specified conditions.",
-          "type": "string",
           "readOnly": true
         }
       },
